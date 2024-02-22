@@ -9,28 +9,34 @@ include "navbar.php";
 <main>
   <div>
     <div class="header_component">
+      <a href="#featured" class="slide-down">
+        <ion-icon name="caret-down-circle"></ion-icon>
+      </a>
       <img src="assets/images/bg-image.png" alt="scented candles" class="head_image">
 
     </div>
-
-    <h2 class="product-heading">
-      Products
-    </h2>
-    <p class="product-paragraph">
-      Indulge yourself or treat your beloved ones to the exquisite experience of Candleleaf. </p>
-
     <?php
-    if (isset($_GET['success_msg'])) {
-      echo "<div class='success_msg'><p>Thank you for your purchase!</p></div>";
-    }
-    ?>
-
-    <?php
-    include "products.php";
-    include "description.php";
+    include "special.php";
 
     ?>
+    <div class="product_section" id="featured">
+      <h2 class="product-heading">
+        Featured & Recommended
+      </h2>
 
+
+      <?php
+      if (isset($_GET['success_msg'])) {
+        echo "<div class='success_msg'><p>Thank you for your purchase!</p></div>";
+      }
+      ?>
+
+      <?php
+      include "products.php";
+      include "description.php";
+
+      ?>
+    </div>
 </main>
 <?php
 include "footer.php";

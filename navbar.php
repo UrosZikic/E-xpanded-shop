@@ -42,10 +42,9 @@
     <ul class="navigation_links">
       <!-- <li><a href=""></a></li> -->
       <li><a href="store.php">Store</a></li>
-      <li><a href="store.php">Store</a></li>
-      <li><a href="store.php">Store</a></li>
-      <li><a href="store.php">Store</a></li>
-      <li><a href="store.php">Store</a></li>
+      <li><a href="store.php">About</a></li>
+      <li><a href="store.php">Showcase</a></li>
+      <li><a href="store.php">Contact</a></li>
     </ul>
 
 

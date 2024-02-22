@@ -2,6 +2,14 @@ const categories = document.querySelectorAll(".category");
 const devices = document.querySelectorAll(".device");
 const prices = document.querySelectorAll(".price");
 
+if (document.querySelector(".pagination").children.length === 1) {
+  while (document.querySelector(".pagination").firstChild) {
+    document
+      .querySelector(".pagination")
+      .removeChild(document.querySelector(".pagination").firstChild);
+  }
+}
+
 function build_a_link() {
   let arr_cat = [];
   let arr_dev = [];

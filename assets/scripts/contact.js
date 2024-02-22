@@ -141,19 +141,19 @@ function sendMail() {
   document.querySelector("#email").value = "";
 
   const formContainer = document.querySelector(".form-container");
-  formContainer.classList.add("disappear");
-  document.querySelector("body").classList.remove("no-scroll");
+  formContainer.classList.remove("move_into_view");
+  // document.querySelector("body").classList.remove("no-scroll");
 }
 
 // opening button
 function open_modal_form() {
   const formContainer = document.querySelector(".form-container");
-  if (formContainer.classList.contains("disappear")) {
-    formContainer.classList.remove("disappear");
-    document.querySelector("body").classList.add("no-scroll");
+  if (formContainer.classList.contains("move_into_view")) {
+    formContainer.classList.remove("move_into_view");
+    // document.querySelector("body").classList.add("no-scroll");
   } else {
-    formContainer.classList.add("disappear");
-    document.querySelector("body").classList.remove("no-scroll");
+    formContainer.classList.add("move_into_view");
+    // document.querySelector("body").classList.remove("no-scroll");
     document.querySelector(".form-notification").innerHTML = "";
     document.querySelector("#subject").value = "";
     document.querySelector("#from_name").value = "";
@@ -162,18 +162,17 @@ function open_modal_form() {
   }
 }
 
-
 //closing function
 document.addEventListener("click", function (event) {
   const formContainer = document.querySelector(".form-container");
   const overlay = document.querySelector(".overlay-body");
-  if (!formContainer.classList.contains("disappear")) {
+  if (!formContainer.classList.contains("move_into_view")) {
     if (
       !formContainer.contains(event.target) &&
       !document.querySelector(".contact-button").contains(event.target)
     ) {
-      formContainer.classList.add("disappear");
-      document.querySelector("body").classList.remove("no-scroll");
+      formContainer.classList.remove("move_into_view");
+      // document.querySelector("body").classList.remove("no-scroll");
       document.querySelector(".movie-browser").disabled = false;
       document.querySelector(".form-notification").innerHTML = "";
       document.querySelector("#subject").value = "";
@@ -186,8 +185,8 @@ document.addEventListener("click", function (event) {
 
 // closing button
 document.querySelector(".close-form").onclick = () => {
-  document.querySelector(".form-container").classList.add("disappear");
-  document.querySelector("body").classList.remove("no-scroll");
+  document.querySelector(".form-container").classList.remove("move_into_view");
+  // document.querySelector("body").classList.remove("no-scroll");
   document.querySelector(".form-notification").innerHTML = "";
   document.querySelector("#subject").value = "";
   document.querySelector("#from_name").value = "";
@@ -202,7 +201,7 @@ document.addEventListener("keydown", (event) => {
   ) {
     const formContainer = document.querySelector(".form-container");
 
-    formContainer.classList.remove("disappear");
+    formContainer.classList.add("move_into_view");
     event.preventDefault();
 
     const focusedElement = document.activeElement;

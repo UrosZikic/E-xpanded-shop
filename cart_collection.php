@@ -3,7 +3,7 @@ if (isset($_COOKIE['js_var_value'])) {
   $cart_collection = $_COOKIE['js_var_value'];
   // Remove unwanted characters
 
-  echo $cart_collection;
+  // echo $cart_collection;
   $cart_collection = explode(',', $cart_collection);
 
 

@@ -5,7 +5,7 @@ $lwr_limit = isset($_GET['m']) ? $_GET['m'] : null;
 $category = isset($_GET['category']) ? $_GET['category'] : null;
 $device = isset($_GET['device']) ? $_GET['device'] : null;
 $price = isset($_GET['price']) ? $_GET['price'] : null;
-
+$search_val = isset($_GET['s_val']) ? $_GET['s_val'] : null;
 
 if ($category != null) {
   $category = explode(',', $category);
@@ -16,76 +16,85 @@ if ($device != null) {
 if ($price != null) {
   $price = explode(',', $price);
 }
-function list_products($conn, $lwr_limit, $upr_limit, $category, $device, $price)
+function list_products($conn, $lwr_limit, $upr_limit, $category, $device, $price, $search_val)
 {
   $queryProducts = "";
-  if ($category == null && $device == null && $price == null) {
-    if ($lwr_limit) {
-      $queryProducts = 'SELECT * FROM `products_regular` WHERE `id` >= ' . $lwr_limit . ' AND `id` <= ' . $upr_limit;
-    } else {
-      $queryProducts = 'SELECT * FROM `products_regular`';
-    }
+  if (!$search_val) {
+    if ($category == null && $device == null && $price == null) {
+      if ($lwr_limit) {
+        $queryProducts = 'SELECT * FROM `products_regular` WHERE `id` >= ' . $lwr_limit . ' AND `id` <= ' . $upr_limit;
+      } else {
+        $queryProducts = 'SELECT * FROM `products_regular`';
+      }
 
-  } else {
-    if ($device == null && $price == null && $category != null) {
-      $categoryString = implode("','", $category);
-      if ($lwr_limit) {
-        echo $lwr_limit;
-        $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') LIMIT $lwr_limit, 12";
-        // $query = "SELECT * FROM your_table LIMIT $startRow, $numRowsToFetch";
-      } else {
-        $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString')";
+    } else {
+      if ($device == null && $price == null && $category != null) {
+        $categoryString = implode("','", $category);
+        if ($lwr_limit) {
+          echo $lwr_limit;
+          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') LIMIT $lwr_limit, 12";
+          // $query = "SELECT * FROM your_table LIMIT $startRow, $numRowsToFetch";
+        } else {
+          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString')";
+        }
+        // 
+      } else if ($category == null && $price == null && $device != null) {
+        $deviceString = implode("','", $device);
+        if ($lwr_limit) {
+          $queryProducts = "SELECT * FROM `products_regular` WHERE `device` IN ('$deviceString') LIMIT $lwr_limit, 12";
+        } else {
+          $queryProducts = "SELECT * FROM `products_regular` WHERE `device` IN ('$deviceString')";
+        }
+        // 
+      } else if ($category == null && $device == null && $price != null) {
+        if ($lwr_limit) {
+          $queryProducts = "SELECT * FROM `products_regular` WHERE `price` >= $price[0] && `price` <= $price[1] LIMIT $lwr_limit, 12";
+        } else {
+          $queryProducts = "SELECT * FROM `products_regular` WHERE `price` >= $price[0] && `price` <= $price[1]";
+        }
+        // 
+      } else if ($category != null && $device != null && $price == null) {
+        $categoryString = implode("','", $category);
+        $deviceString = implode("','", $device);
+        if ($lwr_limit) {
+          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') && `device` IN ('$deviceString') LIMIT $lwr_limit, 12";
+        } else {
+          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') && `device` IN ('$deviceString')";
+        }
+        // 
+      } else if ($category == null && $device != null && $price != null) {
+        $deviceString = implode("','", $device);
+        if ($lwr_limit) {
+          $queryProducts = "SELECT * FROM `products_regular` WHERE `device` IN ('$deviceString') && `price` >= $price[0] && `price` <= $price[1] LIMIT $lwr_limit, 12";
+        } else {
+          $queryProducts = "SELECT * FROM `products_regular` WHERE `device` IN ('$deviceString') && `price` >= $price[0] && `price` <= $price[1]";
+        }
+      } else if ($category != null && $device == null && $price != null) {
+        // 
+        $categoryString = implode("','", $category);
+        if ($lwr_limit) {
+          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') && `price` >= $price[0] && `price` <= $price[1] LIMIT $lwr_limit, 12";
+        } else {
+          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') && `price` >= $price[0] && `price` <= $price[1]";
+        }
       }
       // 
-    } else if ($category == null && $price == null && $device != null) {
-      $deviceString = implode("','", $device);
-      if ($lwr_limit) {
-        $queryProducts = "SELECT * FROM `products_regular` WHERE `device` IN ('$deviceString') LIMIT $lwr_limit, 12";
-      } else {
-        $queryProducts = "SELECT * FROM `products_regular` WHERE `device` IN ('$deviceString')";
-      }
-      // 
-    } else if ($category == null && $device == null && $price != null) {
-      if ($lwr_limit) {
-        $queryProducts = "SELECT * FROM `products_regular` WHERE `price` >= $price[0] && `price` <= $price[1] LIMIT $lwr_limit, 12";
-      } else {
-        $queryProducts = "SELECT * FROM `products_regular` WHERE `price` >= $price[0] && `price` <= $price[1]";
-      }
-      // 
-    } else if ($category != null && $device != null && $price == null) {
-      $categoryString = implode("','", $category);
-      $deviceString = implode("','", $device);
-      if ($lwr_limit) {
-        $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') && `device` IN ('$deviceString') LIMIT $lwr_limit, 12";
-      } else {
-        $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') && `device` IN ('$deviceString')";
-      }
-      // 
-    } else if ($category == null && $device != null && $price != null) {
-      $deviceString = implode("','", $device);
-      if ($lwr_limit) {
-        $queryProducts = "SELECT * FROM `products_regular` WHERE `device` IN ('$deviceString') && `price` >= $price[0] && `price` <= $price[1] LIMIT $lwr_limit, 12";
-      } else {
-        $queryProducts = "SELECT * FROM `products_regular` WHERE `device` IN ('$deviceString') && `price` >= $price[0] && `price` <= $price[1]";
-      }
-    } else if ($category != null && $device == null && $price != null) {
-      // 
-      $categoryString = implode("','", $category);
-      if ($lwr_limit) {
-        $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') && `price` >= $price[0] && `price` <= $price[1] LIMIT $lwr_limit, 12";
-      } else {
-        $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') && `price` >= $price[0] && `price` <= $price[1]";
+      else {
+        $categoryString = implode("','", $category);
+        $deviceString = implode("','", $device);
+        if ($lwr_limit) {
+          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') && `device` IN ('$deviceString') && `price` >= $price[0] && `price` <= $price[1] LIMIT $lwr_limit, 12";
+        } else {
+          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') && `device` IN ('$deviceString') && `price` >= $price[0] && `price` <= $price[1]";
+        }
       }
     }
-    // 
-    else {
-      $categoryString = implode("','", $category);
-      $deviceString = implode("','", $device);
-      if ($lwr_limit) {
-        $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') && `device` IN ('$deviceString') && `price` >= $price[0] && `price` <= $price[1] LIMIT $lwr_limit, 12";
-      } else {
-        $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') && `device` IN ('$deviceString') && `price` >= $price[0] && `price` <= $price[1]";
-      }
+  } else {
+    if ($lwr_limit) {
+      $queryProducts = "SELECT * FROM `products_regular` WHERE `name` LIKE '%" . $search_val . "%'";
+      $queryProducts .= "LIMIT $lwr_limit, 12";
+    } else {
+      $queryProducts = "SELECT * FROM `products_regular` WHERE `name` LIKE '%" . $search_val . "%'";
     }
   }
   $resultProducts = $conn->query($queryProducts);
@@ -94,7 +103,7 @@ function list_products($conn, $lwr_limit, $upr_limit, $category, $device, $price
 
 
 }
-$resultProducts = list_products($conn, $lwr_limit, $upr_limit, $category, $device, $price);
+$resultProducts = list_products($conn, $lwr_limit, $upr_limit, $category, $device, $price, $search_val);
 display_products($resultProducts);
 
 
@@ -159,6 +168,8 @@ function display_products($resultProducts)
       // DAJE UKUPNI BROJ REZULTATA
       $set_total = isset($_GET['s']) ? $_GET['s'] : null;
       $total_products = isset($_GET['t']) ? $_GET['t'] : null;
+      $search_val = isset($_GET['s_val']) ? $_GET['s_val'] : null;
+
       if ($set_total == null) {
         $totalRows = $resultProducts->num_rows;
       } else {
@@ -174,12 +185,21 @@ function display_products($resultProducts)
             $start_row = 0;
             $end_row = 12;
             // $query = "SELECT * FROM your_table LIMIT $startRow, $numRowsToFetch";
-            if (!str_contains($currentUrl, "category") && !str_contains($currentUrl, "device") && !str_contains($currentUrl, "price")) {
-              if (!str_contains($currentUrl, "?i")) {
-                echo $currentUrl . "?i=" . $end_row . "&m=" . $start_row . "&s=" . 1 . "&t=" . $totalRows;
+            if (!$search_val) {
+              if (!str_contains($currentUrl, "category") && !str_contains($currentUrl, "device") && !str_contains($currentUrl, "price")) {
+                if (!str_contains($currentUrl, "?i")) {
+                  echo $currentUrl . "?i=" . $end_row . "&m=" . $start_row . "&s=" . 1 . "&t=" . $totalRows;
+                } else {
+                  $currentUrl = substr($currentUrl, 0, strpos($currentUrl, "?i"));
+                  echo $currentUrl . "?i=" . $end_row . "&m=" . $start_row . "&s=" . 1 . "&t=" . $totalRows;
+                }
               } else {
-                $currentUrl = substr($currentUrl, 0, strpos($currentUrl, "?i"));
-                echo $currentUrl . "?i=" . $end_row . "&m=" . $start_row . "&s=" . 1 . "&t=" . $totalRows;
+                if (!str_contains($currentUrl, "&i")) {
+                  echo $currentUrl . "&i=" . $end_row . "&m=" . $start_row . "&s=" . 1 . "&t=" . $totalRows;
+                } else {
+                  $currentUrl = substr($currentUrl, 0, strpos($currentUrl, "&i"));
+                  echo $currentUrl . "&i=" . $end_row . "&m=" . $start_row . "&s=" . 1 . "&t=" . $totalRows;
+                }
               }
             } else {
               if (!str_contains($currentUrl, "&i")) {
@@ -190,15 +210,24 @@ function display_products($resultProducts)
               }
             }
           } else {
-            $start_row = 1 + (12 * ($i - 1));
+            $start_row = (12 * ($i - 1));
             $end_row = 12 * $i;
-            if (!str_contains($currentUrl, "category") && !str_contains($currentUrl, "device") && !str_contains($currentUrl, "price")) {
-              if (!str_contains($currentUrl, "?i")) {
-                echo $currentUrl . "?i=" . $end_row . "&m=" . $start_row . "&s=" . 1 . "&t=" . $totalRows;
+            if (!$search_val) {
+              if (!str_contains($currentUrl, "category") && !str_contains($currentUrl, "device") && !str_contains($currentUrl, "price")) {
+                if (!str_contains($currentUrl, "?i")) {
+                  echo $currentUrl . "?i=" . $end_row . "&m=" . $start_row . "&s=" . 1 . "&t=" . $totalRows;
+                } else {
+                  // echo $currentUrl . "&i=" . $end_row . "&m=" . $start_row;
+                  $currentUrl = substr($currentUrl, 0, strpos($currentUrl, "?i"));
+                  echo $currentUrl . "?i=" . $end_row . "&m=" . $start_row . "&s=" . 1 . "&t=" . $totalRows;
+                }
               } else {
-                // echo $currentUrl . "&i=" . $end_row . "&m=" . $start_row;
-                $currentUrl = substr($currentUrl, 0, strpos($currentUrl, "?i"));
-                echo $currentUrl . "?i=" . $end_row . "&m=" . $start_row . "&s=" . 1 . "&t=" . $totalRows;
+                if (!str_contains($currentUrl, "&i")) {
+                  echo $currentUrl . "&i=" . $end_row . "&m=" . $start_row . "&s=" . 1 . "&t=" . $totalRows;
+                } else {
+                  $currentUrl = substr($currentUrl, 0, strpos($currentUrl, "&i"));
+                  echo $currentUrl . "&i=" . $end_row . "&m=" . $start_row . "&s=" . 1 . "&t=" . $totalRows;
+                }
               }
             } else {
               if (!str_contains($currentUrl, "&i")) {

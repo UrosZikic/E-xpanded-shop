@@ -76,3 +76,8 @@ body.onclick = (event) => {
     }
   }
 };
+
+const search_btn = document.querySelector(".search_confirm");
+search_btn.addEventListener("click", function () {
+  window.location.href = "store.php?s_val=" + search_engine.value;
+});

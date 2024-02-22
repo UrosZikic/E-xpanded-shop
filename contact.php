@@ -1,4 +1,4 @@
-<div name="contact-form" class="form-container disappear">
+<div name="contact-form" class="form-container">
   <p class="form-notification">
 
   </p>
