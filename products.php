@@ -13,7 +13,7 @@ $resultProducts = $conn->query($queryProducts);
 
           <span style="color:<?php echo $row['quantity'] > 0 ? "#224934" : "#7E1B1B"; ?>; font-weight: 500;">
             <?php
-            $is_in_stock = $row['quantity'] > 0 ? "in stock" : "out of stock";
+            $is_in_stock = $row['quantity'] > 0 ? "available" : "sold out";
             echo $is_in_stock;
             ?>
           </span>

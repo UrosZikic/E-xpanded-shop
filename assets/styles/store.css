@@ -9,6 +9,7 @@
   max-width: 180rem !important;
   margin-top: 200px;
   margin-bottom: 50px;
+  position: relative;
 }
 #store_main .products {
   grid-template-columns: repeat(4, 1fr);
@@ -104,11 +105,22 @@ form input[type="number"] {
   margin: 0 auto !important;
   width: 100%;
   max-width: 160px;
-  padding: 0.5rem;
+  padding: 0.6rem;
   font-size: 1.8rem;
   border: none;
-  background-color: #1c7ed6;
+  background-color: #224934;
   color: #fff;
+}
+.expand {
+  font-size: 2rem;
+  border: none;
+  background-color: #224934;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  position: absolute;
+  top: 5px;
+  right: 30px;
+  display: none;
 }
 
 @media only screen and (max-width: 1600px) {
@@ -123,14 +135,19 @@ form input[type="number"] {
     grid-template-columns: 1fr;
   }
   #store_main .form {
-    position: absolute;
+    position: fixed;
     width: 100%;
-    top: 0;
+    top: 130px;
     width: 100%;
     max-width: 420px;
     padding: 1rem;
     background-color: #fff;
     z-index: 999 !important;
+    left: -400px;
+    transition: left 0.5s;
+  }
+  .expand {
+    display: block;
   }
   #store_main .products {
     grid-template-columns: repeat(4, 1fr);
@@ -152,4 +169,14 @@ form input[type="number"] {
   #store_main .products {
     grid-template-columns: repeat(1, 1fr);
   }
+}
+.expand_filter {
+  left: 0 !important;
+}
+.label_store {
+  padding: 0 4rem;
+}
+.label_store h1 {
+  font-size: 4.6rem;
+  font-weight: 300;
 }

@@ -9,18 +9,10 @@ include "navbar.php";
 <main>
   <div>
     <div class="header_component">
-          <img src="https://images.unsplash.com/photo-1617387247740-7006c0fd700c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="scented candles" class="head_image">
-      <div class="h_component_inner">
-        <div>
-          <p>🌱</p>
-          <h1>The nature candle</h1>
-          <p>Crafted entirely by skilled hands using natural soy wax, Candleleaf is your perfect companion for moments
-            of pure pleasure. </p>
-        </div>
-    
-        <a href="#products">Discover out collection</a>
-      </div>
+      <img src="assets/images/bg-image.png" alt="scented candles" class="head_image">
+
     </div>
+
     <h2 class="product-heading">
       Products
     </h2>
@@ -55,8 +47,8 @@ include "footer.php";
       document.cookie = "js_var_value = " + [];
     })();
   }
- 
-  
+
+
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>

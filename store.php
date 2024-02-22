@@ -7,6 +7,11 @@ include "navbar.php";
 
 ?>
 <main id="store_main">
+  <button class="expand">expand</button>
+  <div class="label_store">
+    <h1>Store</h1>
+    <hr />
+  </div>
   <div class="store_container">
     <div class="store_filter">
       <div class="form">
@@ -98,3 +103,15 @@ include "footer.php";
 include "foot.php";
 ?>
 <script src="assets/scripts/store.js"></script>
+<script>
+  let expanded = false;
+  document.querySelector('.expand').addEventListener('click', () => {
+    if (!expanded) {
+      document.querySelector('#store_main .form').classList.add("expand_filter")
+      expanded = true;
+    } else {
+      document.querySelector('#store_main .form').classList.remove("expand_filter")
+      expanded = false;
+    }
+  })
+</script>

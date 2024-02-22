@@ -16,8 +16,7 @@ if ($device != null) {
 if ($price != null) {
   $price = explode(',', $price);
 }
-$limit = 12;
-function list_products($limit, $conn, $lwr_limit, $upr_limit, $category, $device, $price)
+function list_products($conn, $lwr_limit, $upr_limit, $category, $device, $price)
 {
   $queryProducts = "";
   if ($category == null && $device == null && $price == null) {
@@ -95,7 +94,7 @@ function list_products($limit, $conn, $lwr_limit, $upr_limit, $category, $device
 
 
 }
-$resultProducts = list_products($limit, $conn, $lwr_limit, $upr_limit, $category, $device, $price);
+$resultProducts = list_products($conn, $lwr_limit, $upr_limit, $category, $device, $price);
 display_products($resultProducts);
 
 
