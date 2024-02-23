@@ -98,3 +98,14 @@ function build_a_link() {
   console.log(base_url);
   return (window.location.href = base_url);
 }
+document.addEventListener("click", function (event) {
+  if (
+    !document.querySelector(".expand").contains(event.target) &&
+    !document.querySelector("#store_main .form").contains(event.target)
+  ) {
+    document
+      .querySelector("#store_main .form")
+      .classList.remove("expand_filter");
+    expanded = false;
+  }
+});

@@ -443,3 +443,31 @@ if (document.querySelector(".checkout_forward")) {
     }
   };
 }
+window.addEventListener("load", trigger_menu_icon);
+window.addEventListener("resize", trigger_menu_icon);
+function trigger_menu_icon() {
+  if (body.offsetWidth <= 800) {
+    document.querySelector(".menu_toggle").classList.remove("disappear");
+  } else {
+    document.querySelector(".menu_toggle").classList.add("disappear");
+  }
+}
+
+document.querySelector(".menu_toggle").onclick = () => {
+  if (
+    document.querySelector(".nav_responsive").classList.contains("slide_in")
+  ) {
+    document.querySelector(".nav_responsive").classList.remove("slide_in");
+  } else {
+    document.querySelector(".nav_responsive").classList.add("slide_in");
+  }
+};
+
+document.addEventListener("click", function (event) {
+  if (
+    !document.querySelector(".nav_responsive").contains(event.target) &&
+    !document.querySelector(".menu_toggle").contains(event.target)
+  ) {
+    document.querySelector(".nav_responsive").classList.remove("slide_in");
+  }
+});

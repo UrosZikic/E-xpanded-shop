@@ -49,6 +49,8 @@ async function fetchProducts() {
               let suggested_product = document.createElement("div");
               let product_name = document.createElement("p");
               product_name.textContent = "No results found :/";
+              product_name.classList.add("pr_name");
+
               suggested_product.classList.add("suggested_product");
               suggested_product.classList.add("s_p_none");
               suggested_product.appendChild(product_name);
@@ -79,5 +81,19 @@ body.onclick = (event) => {
 
 const search_btn = document.querySelector(".search_confirm");
 search_btn.addEventListener("click", function () {
-  window.location.href = "store.php?s_val=" + search_engine.value;
+  if (
+    search_engine.value.trim() != "" &&
+    (!document.querySelector(".pr_name") ||
+      document.querySelector(".pr_name").innerHTML != "No results found :/")
+  ) {
+    window.location.href = "store.php?s_val=" + search_engine.value;
+  } else {
+    search_engine.value = "";
+  }
+});
+document.addEventListener("keyup", (e) => {
+  e.preventDefault();
+  if (e.key === "Enter") {
+    window.location.href = "store.php?s_val=" + search_engine.value;
+  }
 });

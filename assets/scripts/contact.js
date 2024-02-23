@@ -173,7 +173,7 @@ document.addEventListener("click", function (event) {
     ) {
       formContainer.classList.remove("move_into_view");
       // document.querySelector("body").classList.remove("no-scroll");
-      document.querySelector(".movie-browser").disabled = false;
+      // document.querySelector(".movie-browser").disabled = false;
       document.querySelector(".form-notification").innerHTML = "";
       document.querySelector("#subject").value = "";
       document.querySelector("#from_name").value = "";

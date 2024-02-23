@@ -126,12 +126,12 @@ function display_products($resultProducts)
           <div class="product">
             <div class="product-image">
 
-              <span style="color:<?php echo $row['quantity'] > 0 ? "#224934" : "#7E1B1B"; ?>; font-weight: 500;">
+              <!-- <span style="color:<?php echo $row['quantity'] > 0 ? "#224934" : "#7E1B1B"; ?>; font-weight: 500;">
                 <?php
-                $is_in_stock = $row['quantity'] > 0 ? "in stock" : "out of stock";
-                echo $is_in_stock;
+                // $is_in_stock = $row['quantity'] > 0 ? "in stock" : "out of stock";
+                // echo $is_in_stock;
                 ?>
-              </span>
+              </span> -->
 
               <ion-icon name="checkmark-outline" class="success-mark"></ion-icon>
 

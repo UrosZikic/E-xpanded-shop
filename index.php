@@ -7,6 +7,7 @@ include "navbar.php";
 
 ?>
 <main>
+
   <div>
     <div class="header_component">
       <a href="#featured" class="slide-down">

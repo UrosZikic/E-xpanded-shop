@@ -9,7 +9,6 @@ include "navbar.php";
 <main id="store_main">
   <button class="expand">expand</button>
   <div class="label_store">
-    <h1>Store</h1>
     <hr />
   </div>
   <div class="store_container">

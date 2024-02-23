@@ -6,7 +6,7 @@
     </a>
 
     <div class="search_container">
-      <input type="text" class="search_engine" />
+      <input type="text" class="search_engine" placeholder="What are you looking for?" />
       <div class="inner_search_container">
         <div class="cat_hover">
           <ul class="cat_placeholder">
@@ -37,12 +37,14 @@
         <div class="cart-amount"></div>
         <ion-icon name="cart-outline"></ion-icon>
       </a>
+      <button class="menu_toggle disappear">
+        <ion-icon name="grid-outline"></ion-icon>
+      </button>
     </div>
 
     <ul class="navigation_links">
       <!-- <li><a href=""></a></li> -->
       <li><a href="store.php">Store</a></li>
-      <li><a href="store.php">About</a></li>
       <li><a href="store.php">Showcase</a></li>
       <li><a href="store.php">Contact</a></li>
     </ul>
@@ -52,4 +54,5 @@
 </div>
 <?php
 include "contact.php";
+include "nav_responsive.php";
 ?>

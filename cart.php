@@ -22,7 +22,7 @@ include "cart_collection.php";
     // Fetch the results
     ?>
     <div class="cart_titles">
-      <strong>Products</strong>
+      <strong>Products saved in your cart</strong>
     </div>
     <?php
     include "cart_collection_regular.php";
