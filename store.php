@@ -7,11 +7,8 @@ include "navbar.php";
 
 ?>
 <main id="store_main">
-  <button class="expand">expand</button>
+  <button class="expand">Categories</button>
   <div class="label_store">
-    <hr />
-  </div>
-  <div class="store_container">
     <div class="store_filter">
       <div class="form">
         <div class="category_container">
@@ -69,7 +66,7 @@ include "navbar.php";
         </div>
         <!-- x -->
         <div class="category_container">
-          <p>Devices:</p>
+          <p>Prices:</p>
           <ul class="category_filter filter_column">
             <li>
               <input type="number" name="min" id="min" min="0" max="50" class="price">
@@ -85,6 +82,10 @@ include "navbar.php";
         <button class="filter_submit" onclick="build_a_link()">search</button>
       </div>
     </div>
+  </div>
+  <!-- <hr /> -->
+
+  <div class="store_container">
     <?php
     include "store_products.php";
     ?>

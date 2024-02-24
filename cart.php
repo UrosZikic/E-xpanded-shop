@@ -35,9 +35,18 @@ include "cart_collection.php";
               alt="<?php echo $row_r['name'] ?>">
           </a>
           <div class="cart-product">
-            <p class="cart-product-name">
+            <p class="cart-product-name disappear">
               <?php
               echo $row_r['name'];
+              ?>
+            </p>
+            <p>
+              <?php
+              if (str_contains($row_r['name'], '_z')) {
+                echo str_replace('_z', "'s", $row_r['name']);
+              } else {
+                echo $row_r['name'];
+              }
               ?>
             </p>
             <button class="remove_product_btn">Remove</button>

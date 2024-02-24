@@ -27,9 +27,7 @@ $resultProducts = $conn->query($queryProducts);
       setcookie("productQuantity", $row['quantity'], time() + 3600, "/");
       ?>
       <div class="single-product-left">
-
-        <div style="background-image: url('assets/images/products/'<?php echo $row['image'] . '.webp' ?>)">
-        </div>
+        <img src="<?php echo "assets/images/products/" . $row['image'] . '.webp' ?>" alt="<?php echo $row['name'] ?>" />
         <strong>All hand-made with natural soy wax, Candleaf is made for your pleasure moments.</strong>
         <p> &#128666 free shipping</p>
       </div>

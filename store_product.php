@@ -87,10 +87,9 @@ $resultProducts = $conn->query($queryProducts);
 
         </div>
         <div class="product-information">
-          <p><strong>Wax:</strong> Top grade Soy wax that delivers a smokeless, consistent burn.</p>
-          <p><strong>Fragrance:</strong> Premium quality ingredients with natural essential oils</p>
-          <p><strong>Burning Time:</strong> 70-75 hours <strong>Dimension:</strong> 10cm x 5cm <strong>Weight:</strong>
-            400g</p>
+          <p><strong>Gameplay:</strong> Immersive mechanics, diverse challenges, and endless entertainment for players.</p>
+          <p><strong>Graphics:</strong> Stunning visuals with lifelike detail, enhancing immersion and visual delight.</p>
+          <p><strong>Replay Value:</strong> Dynamic content ensures hours of enjoyment, with captivating storylines. </p>
         </div>
       </div>
       <?php

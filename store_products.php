@@ -142,8 +142,19 @@ function display_products($resultProducts)
             </div>
             <div class="product--inner-container">
               <div class="product-info">
-                <p class="product_name">
-                  <?php echo $row['name'] ?>
+                <p class="product_name disappear">
+                  <?php
+                  echo $row['name'];
+                  ?>
+                </p>
+                <p>
+                  <?php
+                  if (str_contains($row['name'], '_z')) {
+                    echo str_replace('_z', "'s", $row['name']);
+                  } else {
+                    echo $row['name'];
+                  }
+                  ?>
                 </p>
                 <p>
                   <?php echo $row['price'] . "$" ?>

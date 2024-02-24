@@ -111,8 +111,17 @@ if (isset($_POST['submit_order'])) {
             </div>
           </div>
           <div class="checkout_page_product_right">
-            <p>
+            <p class="disappear">
               <?php echo $row_r['name'] ?>
+            </p>
+            <p>
+              <?php
+              if (str_contains($row_r['name'], '_z')) {
+                echo str_replace('_z', "'s", $row_r['name']);
+              } else {
+                echo $row_r['name'];
+              }
+              ?>
             </p>
             <p> $
               <?php
@@ -125,8 +134,9 @@ if (isset($_POST['submit_order'])) {
       ; ?>
     </div>
     <!-- 2nd part -->
-    <hr />
     <div class="total_price_summary">
+      <hr />
+
       <div>
         <p>Subtotal</p>
         <p class="total_price_sum">

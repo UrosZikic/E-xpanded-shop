@@ -152,7 +152,6 @@ function push_to_cart(
       );
     } else {
       if (product_type === "regular") {
-        console.log(prouctName[0]);
         if (id > 12 && id <= 24) {
           qnt_determiner = qnt_validation
             ? 1
@@ -267,6 +266,7 @@ const cartDecrement = document.querySelectorAll(".cart-qnt-decrement");
 const cartProductTotalPrice = document.querySelectorAll(
   ".cart-product-total-price"
 );
+
 cartIncrement.forEach((incrementor, index) => {
   incrementor.onclick = () => {
     const productName = document
@@ -291,12 +291,14 @@ cartIncrement.forEach((incrementor, index) => {
 
 cartDecrement.forEach((decrementor, index) => {
   decrementor.onclick = () => {
+    console.log(index);
     const productName = document
       .querySelectorAll(".cart-product-name")
       [index].innerHTML.trim();
     const displayIndex = cart_collection.findIndex(
       (item) => item[0] === productName
     );
+    console.log(productName, "error is");
 
     if (parseInt(cartDisplay[displayIndex].innerHTML) > 1) {
       cartDisplay[displayIndex].innerHTML =
@@ -371,11 +373,16 @@ document.querySelectorAll(".remove_product_btn").forEach((item) => {
 
     cart_amount.innerHTML = cart_collection.length;
 
+    get_total_price();
+
     if (
       localStorage.getItem("cart_info") === null ||
       localStorage.getItem("cart_info").length <= 2
     ) {
       window.location.href = "index.php";
+    } else {
+      console.log("sadsad");
+      window.location.href = "cart.php";
     }
   };
 });
