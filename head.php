@@ -20,7 +20,7 @@
     rel="stylesheet">
 
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <link rel="icon" type="image/x-icon" href="assets/images/logo.png">
+  <link rel="icon" type="image/x-icon" href="assets/images/logo.webp">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
   <title>
     <?php

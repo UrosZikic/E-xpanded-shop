@@ -80,8 +80,17 @@ if (isset($_POST['submit_order'])) {
             </div>
           </div>
           <div class="checkout_page_product_right">
-            <p>
+            <p class="disappear">
               <?php echo $row['name'] ?>
+            </p>
+            <p>
+              <?php
+              if (str_contains($row['name'], '_z')) {
+                echo str_replace('_z', "'s", $row['name']);
+              } else {
+                echo $row['name'];
+              }
+              ?>
             </p>
             <p> $
               <?php

@@ -5,12 +5,14 @@
       <li>
         <a href="store.php">Store</a>
       </li>
-
       <li>
-        <a href="showcase.php">Showcase</a>
+        <a href="index.php#available">New Release</a>
       </li>
       <li>
-        <a href="contact.php">Contact</a>
+        <a href="index.php#featured">Featured</a>
+      </li>
+      <li>
+        <a href="index.php#upcoming">Upcoming</a>
       </li>
     </ul>
   </div>

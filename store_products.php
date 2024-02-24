@@ -29,21 +29,23 @@ function list_products($conn, $lwr_limit, $upr_limit, $category, $device, $price
 
     } else {
       if ($device == null && $price == null && $category != null) {
+
         $categoryString = implode("','", $category);
+        $categoryString2 = implode(", ", $category);
+
         if ($lwr_limit) {
-          echo $lwr_limit;
-          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') LIMIT $lwr_limit, 12";
-          // $query = "SELECT * FROM your_table LIMIT $startRow, $numRowsToFetch";
+          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') OR `category` LIKE '%$categoryString2%' LIMIT $lwr_limit, 12";
         } else {
-          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString')";
+          $queryProducts = "SELECT * FROM `products_regular` WHERE TRIM(`category`) IN ('$categoryString') OR `category` LIKE '%$categoryString2%'";
         }
         // 
       } else if ($category == null && $price == null && $device != null) {
         $deviceString = implode("','", $device);
+        $deviceString2 = implode(', ', $device);
         if ($lwr_limit) {
-          $queryProducts = "SELECT * FROM `products_regular` WHERE `device` IN ('$deviceString') LIMIT $lwr_limit, 12";
+          $queryProducts = "SELECT * FROM `products_regular` WHERE `device` IN ('$deviceString') OR `device` LIKE '%$deviceString2%' LIMIT $lwr_limit, 12";
         } else {
-          $queryProducts = "SELECT * FROM `products_regular` WHERE `device` IN ('$deviceString')";
+          $queryProducts = "SELECT * FROM `products_regular` WHERE `device` IN ('$deviceString') OR `device` LIKE '%$deviceString2%'";
         }
         // 
       } else if ($category == null && $device == null && $price != null) {
@@ -55,37 +57,47 @@ function list_products($conn, $lwr_limit, $upr_limit, $category, $device, $price
         // 
       } else if ($category != null && $device != null && $price == null) {
         $categoryString = implode("','", $category);
+        $categoryString2 = implode(", ", $category);
         $deviceString = implode("','", $device);
+        $deviceString2 = implode(', ', $device);
+
         if ($lwr_limit) {
-          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') && `device` IN ('$deviceString') LIMIT $lwr_limit, 12";
+          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') OR `category` LIKE '%$categoryString2%' && `device` IN ('$deviceString') OR `device` LIKE '%$deviceString2%'  LIMIT $lwr_limit, 12";
         } else {
-          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') && `device` IN ('$deviceString')";
+          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') OR `category` LIKE '%$categoryString2%' && `device` IN ('$deviceString') OR `device` LIKE '%$deviceString2%'";
         }
         // 
       } else if ($category == null && $device != null && $price != null) {
         $deviceString = implode("','", $device);
+        $deviceString2 = implode(', ', $device);
+
         if ($lwr_limit) {
-          $queryProducts = "SELECT * FROM `products_regular` WHERE `device` IN ('$deviceString') && `price` >= $price[0] && `price` <= $price[1] LIMIT $lwr_limit, 12";
+          $queryProducts = "SELECT * FROM `products_regular` WHERE `device` IN ('$deviceString') OR `device` LIKE '%$deviceString2%' && `price` >= $price[0] && `price` <= $price[1] LIMIT $lwr_limit, 12";
         } else {
-          $queryProducts = "SELECT * FROM `products_regular` WHERE `device` IN ('$deviceString') && `price` >= $price[0] && `price` <= $price[1]";
+          $queryProducts = "SELECT * FROM `products_regular` WHERE `device` IN ('$deviceString') OR `device` LIKE '%$deviceString2%' && `price` >= $price[0] && `price` <= $price[1]";
         }
       } else if ($category != null && $device == null && $price != null) {
         // 
         $categoryString = implode("','", $category);
+        $categoryString2 = implode(", ", $category);
+
         if ($lwr_limit) {
-          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') && `price` >= $price[0] && `price` <= $price[1] LIMIT $lwr_limit, 12";
+          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') OR `category` LIKE '%$categoryString2%' && `price` >= $price[0] && `price` <= $price[1] LIMIT $lwr_limit, 12";
         } else {
-          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') && `price` >= $price[0] && `price` <= $price[1]";
+          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') OR `category` LIKE '%$categoryString2%' && `price` >= $price[0] && `price` <= $price[1]";
         }
       }
       // 
       else {
         $categoryString = implode("','", $category);
+        $categoryString2 = implode(", ", $category);
         $deviceString = implode("','", $device);
+        $deviceString2 = implode(', ', $device);
+
         if ($lwr_limit) {
-          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') && `device` IN ('$deviceString') && `price` >= $price[0] && `price` <= $price[1] LIMIT $lwr_limit, 12";
+          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') OR `category` LIKE '%$categoryString2%' && `device` IN ('$deviceString') OR `device` LIKE '%$deviceString2%' && `price` >= $price[0] && `price` <= $price[1] LIMIT $lwr_limit, 12";
         } else {
-          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') && `device` IN ('$deviceString') && `price` >= $price[0] && `price` <= $price[1]";
+          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') OR `category` LIKE '%$categoryString2%' && `device` IN ('$deviceString') OR `device` LIKE '%$deviceString2%' && `price` >= $price[0] && `price` <= $price[1]";
         }
       }
     }
@@ -121,6 +133,7 @@ function display_products($resultProducts)
 
       while ($row = $resultProducts->fetch_assoc()) {
         if ($iterate < 12) {
+
           $iterate++;
           ?>
           <div class="product">
@@ -188,7 +201,7 @@ function display_products($resultProducts)
       }
       $currentUrl = $_SERVER['REQUEST_URI'];
       // ISKORISTI TOTALNI BROJ REDOVA I TRENUTNI URL DA NAPRAVIS "MORE PRODUCTS" DUGME KOJE CE GENERISATI VISE PROIZVODA POVECAVANJEM LIMITA
-      for ($i = 1; $i <= ceil($totalRows / 12); $i++) {
+      for ($i = 1; $i <= ceil(($totalRows - 1) / 12); $i++) {
         ?>
         <li>
           <a href="<?php
@@ -221,7 +234,7 @@ function display_products($resultProducts)
               }
             }
           } else {
-            $start_row = (12 * ($i - 1));
+            $start_row = (12 * ($i - 1) + 1);
             $end_row = 12 * $i;
             if (!$search_val) {
               if (!str_contains($currentUrl, "category") && !str_contains($currentUrl, "device") && !str_contains($currentUrl, "price")) {

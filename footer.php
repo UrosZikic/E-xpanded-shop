@@ -3,13 +3,12 @@
     <hr />
     <div class="footer">
       <div>
-        <img src="assets/images/logo.png" alt="logo">
+        <img src="assets/images/logo.webp" alt="logo">
         <p>copyright by C&B</p>
       </div>
       <div class="links_footer">
         <p>Navigate:</p>
-        <a href="">About us</a>
-        <a href="">Store</a>
+        <a href="store.php">Store</a>
         <a href="">Contact</a>
         <a href="">Showcase</a>
       </div>

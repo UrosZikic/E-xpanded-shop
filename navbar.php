@@ -2,11 +2,11 @@
   <nav class="navbar_component">
 
     <a class="navbar-brand" href="index.php">
-      <img src="assets/images/logo.png" alt="website logo">
+      <img src="assets/images/logo.webp" alt="website logo">
     </a>
 
     <div class="search_container">
-      <input type="text" class="search_engine" placeholder="What are you looking for?" />
+      <input type="text" aria-label="search_engine" class="search_engine" placeholder="What are you looking for?" />
       <div class="inner_search_container">
         <div class="cat_hover">
           <ul class="cat_placeholder">
@@ -20,7 +20,7 @@
             <li class="cat_link"><a href="store.php?category=horror">Horror</a></li>
           </ul>
         </div>
-        <button class="search_confirm">
+        <button class="search_confirm" type="button" aria-label="Submit">
           <ion-icon name="search-sharp"></ion-icon>
         </button>
       </div>
@@ -29,7 +29,7 @@
 
     <div class="contact_cart_container">
       <!-- contact -->
-      <button class="contact-button" onclick="open_modal_form()">
+      <button class="contact-button" onclick="open_modal_form()" type="button" aria-label="contact form">
         <ion-icon name="mail-unread"></ion-icon>
       </button>
       <!-- cart -->
@@ -45,8 +45,9 @@
     <ul class="navigation_links">
       <!-- <li><a href=""></a></li> -->
       <li><a href="store.php">Store</a></li>
-      <li><a href="store.php">Showcase</a></li>
-      <li><a href="store.php">Contact</a></li>
+      <li><a href="index.php#available">New release</a></li>
+      <li><a href="index.php#featured">Featured</a></li>
+      <li><a href="index.php#upcoming">Upcoming</a></li>
     </ul>
 
 

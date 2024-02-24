@@ -30,16 +30,28 @@ $resultProducts = $conn->query($queryProducts);
       ?>
       <div class="single-product-left">
         <img src="<?php echo "assets/images/products/" . $row['image'] . '.webp' ?>" alt="<?php echo $row['name'] ?>" />
-        <strong>All hand-made with natural soy wax, Candleaf is made for your pleasure moments.</strong>
-        <p> &#128666 free shipping</p>
+        <strong>
+          <?php echo $row['description'] ?>
+        </strong>
       </div>
       <div class="single-product-right">
-        <h1 class="product_name">
+        <h1 class="product_name disappear">
           <?php echo $row['name'] ?>
+        </h1>
+        <h1 class="product_name disappear">
+          <?php echo $row['name'] ?>
+        </h1>
+        <h1>
+          <?php
+          if (str_contains($row['name'], '_z')) {
+            echo str_replace('_z', "'s", $row['name']);
+          } else {
+            echo $row['name'];
+          }
+          ?>
         </h1>
         <div class="product-right-layout">
           <div class="product-right-layout-one">
-
             <p>
               <?php echo "$" . $row['price'] ?>
             </p>

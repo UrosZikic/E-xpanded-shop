@@ -67,6 +67,9 @@ button.disabled ion-icon {
 }
 h2 {
   font-size: 3.2rem;
+  font-weight: 300;
+  color: white;
+  text-align: center;
 }
 p {
   font-size: 2rem;
@@ -122,7 +125,7 @@ nav img {
   position: relative;
   background-color: #f8f9fa;
   height: 40px;
-  z-index: 999;
+  z-index: 998;
 }
 .cat_placeholder {
   display: flex;
@@ -145,7 +148,7 @@ nav img {
   border: none !important;
   font-size: 1.6rem;
   background-color: rgb(26, 26, 26);
-  background-image: url("/assets/images/Vector.png");
+  background-image: url("/assets/images/Vector.webp");
   background-size: contain;
   text-decoration: none !important;
 }
@@ -183,7 +186,7 @@ nav img {
       rgba(26, 26, 26, 0.1),
       rgba(255, 255, 255, 0.2)
     ),
-    url(/assets/images/Vector.png);
+    url("/assets/images/Vector.webp");
   background-size: contain;
   z-index: 9999;
 }
@@ -194,7 +197,6 @@ nav img {
   flex-direction: column;
   justify-content: center;
   gap: 1rem;
-  padding: 0 1rem;
   border-top: 1px solid white;
   z-index: 200;
   position: relative;
@@ -206,6 +208,7 @@ nav img {
 .suggested_product a {
   display: grid;
   grid-template-columns: 70px 1fr 100px;
+  gap: 0.5rem;
   align-items: center;
   text-decoration: none;
 }
@@ -215,7 +218,6 @@ nav img {
 .suggested_product img {
   width: 70px;
   height: 70px;
-  object-fit: cover;
 }
 .suggested_product p {
   color: white !important;
@@ -265,6 +267,17 @@ ion-icon[name="cart-outline"] {
     margin: 0 0.1rem;
     text-align: center;
   }
+  .cat_hover {
+    display: none;
+  }
+  .inner_search_container {
+    max-width: 60px;
+    grid-template-columns: 1fr;
+  }
+  .inner_search_container button {
+    width: 100%;
+    max-width: 60px;
+  }
   .search_container {
     grid-column: 1/4;
     grid-row: 2;
@@ -304,7 +317,7 @@ ion-icon[name="cart-outline"] {
         rgba(26, 26, 26, 0.7),
         rgba(255, 255, 255, 0.01)
       ),
-      url("/assets/images/Vector.png");
+      url("/assets/images/Vector.webp");
     transition: left 0.5s;
   }
   .nav_responsive div ul {
@@ -353,9 +366,7 @@ ion-icon[name="cart-outline"] {
     margin-right: 0 !important;
     justify-content: center;
   }
-  .inner_search_container ul {
-    display: none;
-  }
+
   .footer {
     grid-template-columns: 1fr !important;
   }
@@ -397,7 +408,7 @@ ion-icon[name="cart-outline"] {
       rgba(26, 26, 26, 0.1),
       rgba(255, 255, 255, 0.2)
     ),
-    url("/assets/images/Vector.png");
+    url("/assets/images/Vector.webp");
   display: flex;
   justify-content: center;
   padding: 24rem 0;
@@ -439,7 +450,7 @@ ion-icon[name="cart-outline"] {
       rgba(0, 0, 0, 0.5) 10%,
       rgba(11, 114, 133, 0.5)
     ),
-    url("/assets/images/Vector.png");
+    url("/assets/images/Vector.webp");
 }
 
 .products {
@@ -525,6 +536,8 @@ ion-icon[name="cart-outline"] {
 .product-image img {
   width: 100%;
   height: 100%;
+  max-width: 460px;
+  max-height: 215px;
   transition: transform 0.15s;
   cursor: pointer;
 }
@@ -629,7 +642,7 @@ footer p {
   width: 100%;
   max-width: 150rem;
   margin: 5rem auto;
-  background-image: url("/assets/images/Vector.png");
+  background-image: url("/assets/images/Vector.webp");
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
@@ -649,7 +662,8 @@ footer p {
   width: 50%;
 }
 .single-product-left strong {
-  font-size: 2rem;
+  font-size: 1.8rem;
+  font-weight: 300;
   text-align: center;
   padding: 0 1rem;
   color: white;
@@ -742,15 +756,15 @@ footer p {
       rgba(0, 0, 0, 0.5) 10%,
       rgba(11, 114, 133, 0.5)
     ),
-    url("/assets/images/Vector.png");
-  padding: 7rem 0 16rem 0;
+    url("/assets/images/Vector.webp");
+  padding: 0 0 16rem 0;
   margin: 5rem 0;
 }
 .cart_container {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 150rem;
+  max-width: 100rem;
   margin: 15rem auto 5rem auto;
 }
 .cart_product_container {
@@ -784,6 +798,12 @@ footer p {
 .cart_name_image_container {
   display: flex;
   align-items: center;
+  gap: 0.5rem;
+}
+.cart_name_image_container p,
+.cart_name_image_container button {
+  font-weight: 300;
+  font-size: 1.7rem;
 }
 .remove_product_btn {
   border: none;
@@ -796,7 +816,7 @@ footer p {
 }
 .total_price_container {
   width: 100%;
-  max-width: 150rem;
+  max-width: 100rem;
   margin: 0 auto;
   display: flex;
   justify-content: end;
@@ -809,6 +829,7 @@ footer p {
 
 .total_price_container p {
   padding: 0rem 5rem;
+  font-weight: 300;
   color: white;
 }
 .total_price_container div p:nth-child(2) {
@@ -820,6 +841,7 @@ footer p {
   max-width: 16rem;
   height: 4rem;
   font-size: 1.7rem;
+  font-weight: 300;
   background-color: transparent;
   border: 3px solid #13b3cf3b !important;
   padding: 1rem;
@@ -837,7 +859,7 @@ footer p {
 .checkout_page {
   width: 100%;
   background-color: transparent;
-  background-image: url("/assets/images/Vector.png");
+  background-image: url("/assets/images/Vector.webp");
 
   padding: 10rem 0 5rem 0 !important;
 
@@ -852,7 +874,7 @@ footer p {
   padding: 2rem;
   background-color: black;
   background-image: linear-gradient(rgba(26, 26, 26, 0.1), rgba(6, 57, 66, 0.5)),
-    url(/assets/images/Vector.png);
+    url("/assets/images/Vector.webp");
   background-size: contain;
   color: white !important;
 }
@@ -912,7 +934,7 @@ form div:first-child,
 }
 form label {
   font-size: 2.2rem;
-  font-weight: 500;
+  font-weight: 300;
   color: white;
 }
 form input {
@@ -943,6 +965,7 @@ input[type="submit"] {
 }
 .total_price_summary div p {
   font-size: 1.8rem;
+  font-weight: 300;
 }
 /* success message */
 .success_msg,
@@ -955,22 +978,34 @@ input[type="submit"] {
   transform: translate(-50%, -50%);
   padding: 5rem;
   text-align: center;
-  background-color: #224934;
+  background-color: black;
+  background-image: linear-gradient(rgba(26, 26, 26, 0.1), rgba(6, 57, 66, 0.5)),
+    url("/assets/images/Vector.webp");
   color: white;
   z-index: 100;
 }
 .product_success {
-  z-index: 999;
+  z-index: 99999;
   transition: all 0.5s;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 .product_success div {
   display: flex;
   justify-content: center;
   gap: 1rem;
 }
+.product_success div button {
+  padding: 1rem 2rem;
+  font-size: 1.8rem;
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+}
 .total_price_container div p:nth-child(2) .product_success button {
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 1rem 2rem;
   font-size: 1.8rem;
   background-color: white;
   color: #224934;
@@ -997,7 +1032,7 @@ input[type="submit"] {
       rgba(255, 255, 255, 0.1),
       rgba(0, 0, 0, 0.1)
     ),
-    url("../images/Vector.png");
+    url("../images/Vector.webp");
   background-size: contain;
   padding: 15px;
   gap: 5px;
@@ -1066,6 +1101,9 @@ input[type="submit"] {
   width: 100%;
   gap: 1rem;
 }
+.cart-product-numbers p {
+  font-weight: 300;
+}
 
 .product_success_overlay {
   position: fixed;
@@ -1094,4 +1132,46 @@ input[type="submit"] {
 }
 .video_special {
   background-color: black;
+}
+
+/* upcoming */
+.upcoming_container {
+  width: 100%;
+  max-width: 100rem;
+  margin: 0 auto;
+  display: flex;
+  gap: 1rem;
+  padding: 2rem;
+}
+.upcoming_container div {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.upcoming_container div img {
+  width: 100%;
+  height: 100%;
+  max-width: 460px;
+  max-height: 215px;
+  object-fit: cover;
+}
+.upcoming_container div p {
+  font-size: 1.7rem;
+  font-weight: 300;
+  color: white;
+  padding: 0 1rem;
+}
+@media only screen and (max-width: 768px) {
+  .upcoming_container {
+    flex-direction: column;
+  }
+  .upcoming_container div {
+    align-items: center;
+  }
+  .upcoming_container p {
+    font-size: 1.4rem !important;
+  }
+  .header_component {
+    padding: 16rem 0;
+  }
 }

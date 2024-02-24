@@ -10,10 +10,10 @@ include "navbar.php";
 
   <div>
     <div class="header_component">
-      <a href="#featured" class="slide-down">
+      <a href="#featured" class="slide-down" aria-label="slide_to_products">
         <ion-icon name="caret-down-circle"></ion-icon>
       </a>
-      <img src="assets/images/bg-image.png" alt="scented candles" class="head_image">
+      <img src="assets/images/bg-image.webp" alt="scented candles" class="head_image">
 
     </div>
     <?php
@@ -34,7 +34,7 @@ include "navbar.php";
 
       <?php
       include "products.php";
-      include "description.php";
+      include "upcoming.php";
 
       ?>
     </div>

@@ -3,7 +3,7 @@ include 'connection.php';
 $queryProducts = 'SELECT * FROM `products`';
 $resultProducts = $conn->query($queryProducts);
 ?>
-<div class="products" id="products">
+<div class="products" id="products" id="featured">
   <?php
   if ($resultProducts->num_rows != 0) {
     while ($row = $resultProducts->fetch_assoc()) {
@@ -11,12 +11,12 @@ $resultProducts = $conn->query($queryProducts);
       <div class="product">
         <div class="product-image">
 
-          <span style="color:<?php echo $row['quantity'] > 0 ? "#224934" : "#7E1B1B"; ?>; font-weight: 500;">
+          <!-- <span style="color:<?php echo $row['quantity'] > 0 ? "#224934" : "#7E1B1B"; ?>; font-weight: 500;">
             <?php
             $is_in_stock = $row['quantity'] > 0 ? "available" : "sold out";
             echo $is_in_stock;
             ?>
-          </span>
+          </span> -->
 
           <ion-icon name="checkmark-outline" class="success-mark"></ion-icon>
 
@@ -27,8 +27,17 @@ $resultProducts = $conn->query($queryProducts);
         </div>
         <div class="product--inner-container">
           <div class="product-info">
-            <p class="product_name">
+            <p class="product_name disappear">
               <?php echo $row['name'] ?>
+            </p>
+            <p>
+              <?php
+              if (str_contains($row['name'], '_z')) {
+                echo str_replace('_z', "'s", $row['name']);
+              } else {
+                echo $row['name'];
+              }
+              ?>
             </p>
             <p>
               <?php echo $row['price'] . "$" ?>

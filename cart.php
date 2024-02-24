@@ -93,9 +93,18 @@ include "cart_collection.php";
             <img src="<?php echo "assets/images/products/" . $row['image'] . '.webp' ?>" alt="<?php echo $row['name'] ?>">
           </a>
           <div class="cart-product">
-            <p class="cart-product-name">
+            <p class="cart-product-name disappear">
               <?php
               echo $row['name'];
+              ?>
+            </p>
+            <p>
+              <?php
+              if (str_contains($row['name'], '_z')) {
+                echo str_replace('_z', "'s", $row['name']);
+              } else {
+                echo $row['name'];
+              }
               ?>
             </p>
             <button class="remove_product_btn">Remove</button>

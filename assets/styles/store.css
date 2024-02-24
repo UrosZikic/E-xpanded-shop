@@ -7,7 +7,7 @@
 #store_main {
   width: 100%;
   /* max-width: 200rem !important; */
-  margin-top: 75px;
+  margin-top: 55px;
   padding: 100px 0px 50px 50px;
   position: relative;
   background-color: black;
@@ -15,7 +15,7 @@
       rgba(26, 26, 26, 0.1),
       rgba(9, 65, 117, 0.5)
     ),
-    url(/assets/images/Vector.png);
+    url("/assets/images/Vector.webp");
   background-size: contain;
 }
 #store_main p,
@@ -152,7 +152,7 @@ form input[type="number"] {
   transition: left 0.5s;
   background-color: black;
   background-image: linear-gradient(rgba(26, 26, 26, 0.1), rgba(6, 57, 66, 0.5)),
-    url(/assets/images/Vector.png);
+    url("/assets/images/Vector.webp");
   background-size: contain;
 }
 .expand {

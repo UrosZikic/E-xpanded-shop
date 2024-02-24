@@ -7,7 +7,7 @@ include "navbar.php";
 
 ?>
 <main id="store_main">
-  <button class="expand">Categories</button>
+  <button class="expand">Filter products</button>
   <div class="label_store">
     <div class="store_filter">
       <div class="form">

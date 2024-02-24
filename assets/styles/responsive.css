@@ -96,7 +96,7 @@
   }
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 550px) {
   .cart-product-numbers {
     flex-direction: column;
   }
@@ -120,6 +120,9 @@
     justify-content: center;
     margin-top: 1rem;
   }
+  .cart_product_container {
+    gap: 1rem;
+  }
 }
 @media only screen and (max-width: 850px) {
   .checkout_page {
@@ -141,5 +144,12 @@
 @media only screen and (max-width: 400px) {
   .product_success div {
     flex-direction: column;
+  }
+  .cart_name_image_container {
+    flex-direction: column;
+    padding: 0.1rem 0;
+  }
+  .total_price_container p {
+    padding: 0 1rem;
   }
 }
