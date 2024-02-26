@@ -102,11 +102,15 @@ function list_products($conn, $lwr_limit, $upr_limit, $category, $device, $price
       }
     }
   } else {
+    $search_val_escaped = mysqli_real_escape_string($conn, $search_val);
+    if (str_contains($search_val_escaped, "'s")) {
+      str_replace("'s", "_z", $search_val_escaped);
+    }
     if ($lwr_limit) {
-      $queryProducts = "SELECT * FROM `products_regular` WHERE `name` LIKE '%" . $search_val . "%'";
+      $queryProducts = "SELECT * FROM `products_regular` WHERE `name` LIKE '%" . $search_val_escaped . "%'";
       $queryProducts .= "LIMIT $lwr_limit, 12";
     } else {
-      $queryProducts = "SELECT * FROM `products_regular` WHERE `name` LIKE '%" . $search_val . "%'";
+      $queryProducts = "SELECT * FROM `products_regular` WHERE `name` LIKE '%" . $search_val_escaped . "%'";
     }
   }
   $resultProducts = $conn->query($queryProducts);

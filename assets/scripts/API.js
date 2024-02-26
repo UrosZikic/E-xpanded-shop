@@ -21,6 +21,8 @@ function fetchProducts() {
         count++;
         if (search_engine.value.includes("'s")) {
           name_handle = search_engine.value.replace("'s", "_z");
+        } else if (search_engine.value.includes("'")) {
+          name_handle = search_engine.value.replace("'", "_");
         } else {
           name_handle = search_engine.value;
         }
@@ -107,7 +109,17 @@ search_btn.addEventListener("click", function () {
 
 document.addEventListener("keyup", function (e) {
   e.preventDefault();
-  if (e.key === "Enter") {
-    window.location.href = "store.php?s_val=" + search_engine.value;
+  if (
+    e.key === "Enter" &&
+    name_handle.trim().toLowerCase() != "" &&
+    (!document.querySelector(".pr_name") ||
+      document.querySelector(".pr_name").innerHTML != "No results found :/")
+  ) {
+    if (name_handle.includes("'s")) {
+      name_handle = search_engine.value.replace("'s", "_z");
+    } else if (name_handle.includes("'")) {
+      name_handle = search_engine.value.replace("'", "_");
+    }
+    window.location.href = "store.php?s_val=" + name_handle;
   }
 });
