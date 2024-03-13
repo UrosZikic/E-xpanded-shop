@@ -119,7 +119,9 @@ document.addEventListener("keyup", function (e) {
       name_handle = search_engine.value.replace("'s", "_z");
     } else if (name_handle.includes("'")) {
       name_handle = search_engine.value.replace("'", "_");
-    }
+    }  else {
+    search_engine.value = "";
+  }
     window.location.href = "store.php?s_val=" + name_handle;
   }
 });
