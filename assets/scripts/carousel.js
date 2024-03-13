@@ -37,3 +37,8 @@ $(".products").slick({
     // instead of a settings object
   ],
 });
+
+function vanilla() {
+  console.log("hell yeah");
+}
+vanilla();

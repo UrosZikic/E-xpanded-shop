@@ -7,6 +7,7 @@ $device = isset($_GET['device']) ? $_GET['device'] : null;
 $price = isset($_GET['price']) ? $_GET['price'] : null;
 $search_val = isset($_GET['s_val']) ? $_GET['s_val'] : null;
 
+
 if ($category != null) {
   $category = explode(',', $category);
 }
@@ -15,7 +16,18 @@ if ($device != null) {
 }
 if ($price != null) {
   $price = explode(',', $price);
+  if (count($price) === 1) {
+    $placeholder_max = $price[0];
+    $price[0] = 0;
+    $price[1] = $placeholder_max;
+  } else if ($price[0] > $price[1]) {
+    $placeholder_max = $price[0];
+    $price[0] = $price[1];
+    $price[1] = $placeholder_max;
+  }
 }
+
+
 function list_products($conn, $lwr_limit, $upr_limit, $category, $device, $price, $search_val)
 {
   $queryProducts = "";
@@ -62,9 +74,9 @@ function list_products($conn, $lwr_limit, $upr_limit, $category, $device, $price
         $deviceString2 = implode(', ', $device);
 
         if ($lwr_limit) {
-          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') OR `category` LIKE '%$categoryString2%' && `device` IN ('$deviceString') OR `device` LIKE '%$deviceString2%'  LIMIT $lwr_limit, 12";
+          $queryProducts = "SELECT * FROM `products_regular` WHERE (`category` IN ('$categoryString') OR `category` LIKE '%$categoryString2%') && (`device` IN ('$deviceString') OR `device` LIKE '%$deviceString2%')  LIMIT $lwr_limit, 12";
         } else {
-          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') OR `category` LIKE '%$categoryString2%' && `device` IN ('$deviceString') OR `device` LIKE '%$deviceString2%'";
+          $queryProducts = "SELECT * FROM `products_regular` WHERE (`category` IN ('$categoryString') OR `category` LIKE '%$categoryString2%') && (`device` IN ('$deviceString') OR `device` LIKE '%$deviceString2%')";
         }
         // 
       } else if ($category == null && $device != null && $price != null) {
@@ -72,9 +84,9 @@ function list_products($conn, $lwr_limit, $upr_limit, $category, $device, $price
         $deviceString2 = implode(', ', $device);
 
         if ($lwr_limit) {
-          $queryProducts = "SELECT * FROM `products_regular` WHERE `device` IN ('$deviceString') OR `device` LIKE '%$deviceString2%' && `price` >= $price[0] && `price` <= $price[1] LIMIT $lwr_limit, 12";
+          $queryProducts = "SELECT * FROM `products_regular` WHERE (`device` IN ('$deviceString') OR `device` LIKE '%$deviceString2%') && `price` >= $price[0] && `price` <= $price[1] LIMIT $lwr_limit, 12";
         } else {
-          $queryProducts = "SELECT * FROM `products_regular` WHERE `device` IN ('$deviceString') OR `device` LIKE '%$deviceString2%' && `price` >= $price[0] && `price` <= $price[1]";
+          $queryProducts = "SELECT * FROM `products_regular` WHERE (`device` IN ('$deviceString') OR `device` LIKE '%$deviceString2%') && `price` >= $price[0] && `price` <= $price[1]";
         }
       } else if ($category != null && $device == null && $price != null) {
         // 
@@ -82,9 +94,9 @@ function list_products($conn, $lwr_limit, $upr_limit, $category, $device, $price
         $categoryString2 = implode(", ", $category);
 
         if ($lwr_limit) {
-          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') OR `category` LIKE '%$categoryString2%' && `price` >= $price[0] && `price` <= $price[1] LIMIT $lwr_limit, 12";
+          $queryProducts = "SELECT * FROM `products_regular` WHERE (`category` IN ('$categoryString') OR `category` LIKE '%$categoryString2%') && `price` >= $price[0] && `price` <= $price[1] LIMIT $lwr_limit, 12";
         } else {
-          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') OR `category` LIKE '%$categoryString2%' && `price` >= $price[0] && `price` <= $price[1]";
+          $queryProducts = "SELECT * FROM `products_regular` WHERE (`category` IN ('$categoryString') OR `category` LIKE '%$categoryString2%') && `price` >= $price[0] && `price` <= $price[1]";
         }
       }
       // 
@@ -93,24 +105,19 @@ function list_products($conn, $lwr_limit, $upr_limit, $category, $device, $price
         $categoryString2 = implode(", ", $category);
         $deviceString = implode("','", $device);
         $deviceString2 = implode(', ', $device);
-
         if ($lwr_limit) {
-          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') OR `category` LIKE '%$categoryString2%' && `device` IN ('$deviceString') OR `device` LIKE '%$deviceString2%' && `price` >= $price[0] && `price` <= $price[1] LIMIT $lwr_limit, 12";
+          $queryProducts = "SELECT * FROM `products_regular` WHERE (`category` IN ('$categoryString') OR `category` LIKE '%$categoryString2%') && (`device` IN ('$deviceString') OR `device` LIKE '%$deviceString2%') && `price` >= $price[0] && `price` <= $price[1] LIMIT $lwr_limit, 12";
         } else {
-          $queryProducts = "SELECT * FROM `products_regular` WHERE `category` IN ('$categoryString') OR `category` LIKE '%$categoryString2%' && `device` IN ('$deviceString') OR `device` LIKE '%$deviceString2%' && `price` >= $price[0] && `price` <= $price[1]";
+          $queryProducts = "SELECT * FROM `products_regular` WHERE (`category` IN ('$categoryString') OR `category` LIKE '%$categoryString2%') && (`device` IN ('$deviceString') OR `device` LIKE '%$deviceString2%') && `price` >= $price[0] && `price` <= $price[1]";
         }
       }
     }
   } else {
-    $search_val_escaped = mysqli_real_escape_string($conn, $search_val);
-    if (str_contains($search_val_escaped, "'s")) {
-      str_replace("'s", "_z", $search_val_escaped);
-    }
     if ($lwr_limit) {
-      $queryProducts = "SELECT * FROM `products_regular` WHERE `name` LIKE '%" . $search_val_escaped . "%'";
+      $queryProducts = "SELECT * FROM `products_regular` WHERE `name` LIKE '%" . $search_val . "%'";
       $queryProducts .= "LIMIT $lwr_limit, 12";
     } else {
-      $queryProducts = "SELECT * FROM `products_regular` WHERE `name` LIKE '%" . $search_val_escaped . "%'";
+      $queryProducts = "SELECT * FROM `products_regular` WHERE `name` LIKE '%" . $search_val . "%'";
     }
   }
   $resultProducts = $conn->query($queryProducts);
@@ -143,11 +150,11 @@ function display_products($resultProducts)
           <div class="product">
             <div class="product-image">
 
-              <!-- <span style="color:<?php echo $row['quantity'] > 0 ? "#224934" : "#7E1B1B"; ?>; font-weight: 500;">
+              <!-- <span style="font-weight: 300; color: green; border: 1px solid #1a1a1a; background-color: white; padding: 0.5rem">
                 <?php
                 // $is_in_stock = $row['quantity'] > 0 ? "in stock" : "out of stock";
-                // echo $is_in_stock;
-                ?>
+                echo $row['category']
+                  ?>
               </span> -->
 
               <ion-icon name="checkmark-outline" class="success-mark"></ion-icon>
@@ -190,6 +197,21 @@ function display_products($resultProducts)
 
     ?>
   </div>
+  <?php
+  if ($resultProducts->num_rows == 0) {
+    ?>
+    <div
+      style="display:flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; max-width: 1000px; margin: 0 auto; grid-row: 1; grid-column: 1; padding: 5rem 0">
+      <ion-icon name="skull-outline" style="color: white; font-size: 5rem"></ion-icon>
+      <h1 style="color: white; font-size: 4rem; font-weight: 300">Dead End</h1>
+      <a href="store.php"
+        style="font-size: 3rem; color: #3bc9db !important; text-decoration: none; font-weight: 300 !important;">Go
+        back
+        to Store</a>
+    </div>
+    <?php
+  }
+  ?>
   <ul class="pagination">
     <?php
     if ($resultProducts->num_rows != 0) {

@@ -32,14 +32,12 @@ function build_a_link() {
       }
     }
   }
-  console.log(base_url);
 
   devices.forEach((dev) => {
     if (dev.checked == true) {
       arr_dev.push(dev.name);
     }
   });
-  console.log(base_url);
 
   if (arr_dev.length > 0) {
     if (arr_cat.length > 0) {
@@ -58,15 +56,15 @@ function build_a_link() {
       }
     }
   }
-  console.log(base_url);
 
   prices.forEach((price) => {
     if (price) {
       if (!price.value == "") arr_price.push(price.value);
     }
   });
-  console.log(arr_price[0] !== "", arr_price[1]);
-  if (arr_price[0] !== undefined && arr_price[1] !== undefined) {
+  // arr_price[0] !== undefined && arr_price[1] !== undefined  -> not needed since we want the url to succeed even if the price range is not complete, look up store_products.php for
+  // code clarification on how incomplete price range is being treated
+  if (true) {
     if (arr_cat.length >= 1 || arr_dev.length >= 1) {
       base_url += "&price=";
     } else {
@@ -83,7 +81,6 @@ function build_a_link() {
       }
     }
   }
-  console.log(base_url);
 
   if (
     arr_cat.length < 1 &&

@@ -1,4 +1,4 @@
-const search_engine = document.querySelector(".search_engine");
+let search_engine = document.querySelector(".search_engine");
 const suggest_container = document.querySelector(".suggest_container");
 let name_handle;
 
@@ -19,7 +19,31 @@ function fetchProducts() {
       let count = 1;
       data.forEach(function (product) {
         count++;
-        if (search_engine.value.includes("'s")) {
+        let count_z = 0;
+        let count_underscore = 0;
+        for (let i = 0; i < product.name.length; i++) {
+          if (product.name[i] == "z") {
+            count_z++;
+          } else if (product.name[i] == "_") {
+            count_underscore++;
+          }
+        }
+        //
+        if (
+          count_z === 1 &&
+          count_underscore &&
+          product.name.includes("_z") &&
+          (search_engine.value.includes("_") ||
+            search_engine.value.includes("z"))
+        ) {
+          if (search_engine.value.includes("_z")) {
+            name_handle = search_engine.value.replace("_z", "__zz");
+          } else if (search_engine.value.includes("_")) {
+            name_handle = search_engine.value.replace("_", "__");
+          } else {
+            name_handle = search_engine.value.replace("z", "zz");
+          }
+        } else if (search_engine.value.includes("'s")) {
           name_handle = search_engine.value.replace("'s", "_z");
         } else if (search_engine.value.includes("'")) {
           name_handle = search_engine.value.replace("'", "_");
@@ -119,7 +143,9 @@ document.addEventListener("keyup", function (e) {
       name_handle = search_engine.value.replace("'s", "_z");
     } else if (name_handle.includes("'")) {
       name_handle = search_engine.value.replace("'", "_");
+    } else {
+      search_engine.value = "";
     }
-    window.location.href = "store.php?s_val=" + name_handle;
+    // window.location.href = "store.php?s_val=" + name_handle;
   }
 });

@@ -67,10 +67,27 @@ $resultProducts = $conn->query($queryProducts);
                 <button class="qnt-increment">+</button>
 
               </div>
+
             </div>
           </div>
           <!-- x -->
           <div class="product-right-layout-two">
+            <ul style="font-weight: 300; font-size: 1.8rem; display:flex; gap: 0.4rem;">genre:
+              <span style="margin-left: 0.1rem;"></span>
+              <?php
+              $cat = explode(' ', $row['category']);
+              for ($i = 0; $i < count($cat); $i++) {
+                ?>
+                <li style="font-weight: 300; font-size: 1.8rem; text-decoration: none">
+                  <?php
+
+                  echo $cat[$i];
+                  ?>
+                </li>
+                <?php
+              }
+              ?>
+            </ul>
             <div>
 
               <div class="radio-container">

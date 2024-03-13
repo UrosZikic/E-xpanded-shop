@@ -281,9 +281,10 @@ cartIncrement.forEach((incrementor, index) => {
         parseInt(cartDisplay[displayIndex].innerHTML) + 1;
     }
 
-    cartProductTotalPrice[displayIndex].innerHTML =
+    cartProductTotalPrice[displayIndex].innerHTML = (
       parseFloat(cartProductPrice[displayIndex].innerHTML) *
-      parseInt(cartDisplay[displayIndex].innerHTML);
+      parseInt(cartDisplay[displayIndex].innerHTML)
+    ).toFixed(2);
 
     updateCart();
   };
@@ -305,9 +306,10 @@ cartDecrement.forEach((decrementor, index) => {
         parseInt(cartDisplay[displayIndex].innerHTML) - 1;
     }
 
-    cartProductTotalPrice[displayIndex].innerHTML =
+    cartProductTotalPrice[displayIndex].innerHTML = (
       parseFloat(cartProductPrice[displayIndex].innerHTML) *
-      parseInt(cartDisplay[displayIndex].innerHTML);
+      parseInt(cartDisplay[displayIndex].innerHTML)
+    ).toFixed(2);
 
     updateCart();
   };
@@ -381,7 +383,6 @@ document.querySelectorAll(".remove_product_btn").forEach((item) => {
     ) {
       window.location.href = "index.php";
     } else {
-      console.log("sadsad");
       window.location.href = "cart.php";
     }
   };
